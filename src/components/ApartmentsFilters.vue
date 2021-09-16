@@ -140,11 +140,6 @@ export default {
   border: 1px solid #d8d8d8;
   border-radius: 10px;
   padding: 30px;
-
-  &__label {
-    color: #79818c;
-    font-size: 14px;
-  }
 }
 .filter-buttons {
   margin-top: 32px;
@@ -194,8 +189,11 @@ export default {
 
   &__input {
     border: none;
+    border-radius: 0;
     outline: none;
     margin: 0 8px;
+    padding: 0;
+    height: auto;
     width: 100%;
     color: #1f1f25;
     font-size: 16px;

@@ -50,7 +50,7 @@ body {
 
 #app {
   font-family: "TT Norms Pro", Helvetica, Arial;
-  max-width: 1000px;
+  max-width: 730px;
   margin: 80px auto;
   color: #1f1f25;
 }
@@ -62,6 +62,17 @@ h1 {
 
 h2 {
   margin: 0 0 24px;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+
+a {
+  color: #367ee7;
+  text-decoration: none;
 }
 
 button {
@@ -105,5 +116,38 @@ button {
   &:disabled {
     opacity: 0.5;
   }
+}
+
+input {
+  font-family: "TT Norms Pro", Helvetica, Arial;
+  background: #FFFFFF;
+  border: 1px solid #d8d8d8;
+  height: 48px;
+  border-radius: 8px;
+  padding: 0 16px;
+  outline: none;
+  font-size: 16px;
+
+  &::placeholder {
+    color: #79818c;
+  }
+  &:hover {
+    border-color: #79818c;
+  }
+  &:not(:placeholder-shown) {
+    border-color: #818181;
+  }
+  &:focus, &:active {
+    border-color: #367ee7;
+    &::placeholder {
+      color: #d1d1d1;
+    }
+  }
+}
+
+label {
+  color: #79818c;
+  font-size: 14px;
+  margin-bottom: 8px;
 }
 </style>
