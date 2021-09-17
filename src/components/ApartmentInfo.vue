@@ -78,7 +78,7 @@ export default {
   },
   computed: {
     image() {
-      return require('../assets/' + this.img)
+      return require('../assets/images/' + this.img)
     }
   },
   methods: {
@@ -98,13 +98,13 @@ export default {
     &__green {
       color: #56B77f;
       padding-right: 32px;
-      background: #ddffe2 url("../assets/green_question.svg") calc(100% - 10px) no-repeat;
+      background: #ddffe2 url("../assets/images/green_question.svg") calc(100% - 10px) no-repeat;
     }
 
     &__orange {
       color: #f2994a;
       padding-right: 32px;
-      background: #fff7f2 url("../assets/orange_question.svg") calc(100% - 10px) no-repeat;
+      background: #fff7f2 url("../assets/images/orange_question.svg") calc(100% - 10px) no-repeat;
     }
 
     &__purple {
@@ -138,7 +138,7 @@ export default {
     position: relative;
     &::after {
       content: "";
-      background: url("../assets/right.svg") no-repeat;
+      background: url("../assets/images/right.svg") no-repeat;
       position: absolute;
       top: 0;
       right: -20px;

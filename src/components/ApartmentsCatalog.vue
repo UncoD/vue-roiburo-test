@@ -169,7 +169,7 @@ export default {
   }
 
   &__heart-btn {
-    background: #f1f5f9 url("../assets/heart.svg") no-repeat 50% 50%;
+    background: #f1f5f9 url("../assets/images/heart.svg") no-repeat 50% 50%;
     border-radius: 40px;
     width: 40px;
     height: 40px;
@@ -178,7 +178,7 @@ export default {
 
   &__expand-btn {
     user-select: none;
-    background: url("../assets/down.svg") no-repeat 50% 50%;
+    background: url("../assets/images/down.svg") no-repeat 50% 50%;
     width: 20px;
     height: 20px;
     &__inverted {
