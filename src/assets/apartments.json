@@ -1,0 +1,154 @@
+[
+  {
+    "type": "Студия",
+    "floor": "10/15",
+    "deadline": "1 кв. 2021",
+    "square": 80,
+    "price": 90000,
+    "finishing": "Без отделки",
+    "housing": "1",
+    "image": "apartment.png",
+    "labels": [
+      {
+        "label": "Скидка 2%",
+        "description": "Скидка"
+      },
+      {
+        "label": "Материнский капитал",
+        "description": "Капитал"
+      },
+      {
+        "label": "Ипотека от 0,1%",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "type": "Студия",
+    "floor": "5/25",
+    "deadline": "Дом сдан",
+    "square": 50,
+    "price": 75000,
+    "finishing": "С отделкой",
+    "housing": "3",
+    "image": "apartment.png",
+    "labels": [
+      {
+        "label": "Скидка 5%",
+        "description": "Скидка"
+      },
+      {
+        "label": "Материнский капитал",
+        "description": "Капитал"
+      }
+    ]
+  },
+  {
+    "type": "Студия",
+    "floor": "10/25",
+    "deadline": "Дом сдан",
+    "square": 120,
+    "price": 150000,
+    "finishing": "С отделкой",
+    "housing": "2",
+    "image": "apartment.png",
+    "labels": [
+      {
+        "label": "Материнский капитал",
+        "description": "Капитал"
+      },
+      {
+        "label": "Ипотека от 0,2%",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "type": "Своб. план.",
+    "floor": "5/25",
+    "deadline": "3 кв. 2021",
+    "square": 150,
+    "price": 200000,
+    "finishing": "Без отделки",
+    "housing": "3",
+    "image": "apartment.png",
+    "labels": [
+      {
+        "label": "Ипотека от 0,2%",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "type": "2",
+    "floor": "10/20",
+    "deadline": "1 кв. 2021",
+    "square": 90,
+    "price": 100000,
+    "finishing": "C отделкой",
+    "housing": "4",
+    "image": "apartment.png",
+    "labels": [
+      {
+        "label": "Скидка 3%",
+        "description": "Скидка"
+      },
+      {
+        "label": "Материнский капитал",
+        "description": "Капитал"
+      },
+      {
+        "label": "Ипотека от 0,5%",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "type": "2",
+    "floor": "15/20",
+    "deadline": "1 кв. 2021",
+    "square": 90,
+    "price": 110000,
+    "finishing": "C отделкой",
+    "housing": "4",
+    "image": "apartment.png",
+    "labels": [
+      {
+        "label": "Скидка 3%",
+        "description": "Скидка"
+      },
+      {
+        "label": "Материнский капитал",
+        "description": "Капитал"
+      },
+      {
+        "label": "Ипотека от 0,5%",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "type": "6",
+    "floor": "10/20",
+    "deadline": "1 кв. 2021",
+    "square": 200,
+    "price": 300000,
+    "finishing": "C отделкой",
+    "housing": "4",
+    "image": "apartment.png",
+    "labels": [
+      {
+        "label": "Скидка 5%",
+        "description": "Скидка"
+      },
+      {
+        "label": "Материнский капитал",
+        "description": "Капитал"
+      },
+      {
+        "label": "Ипотека от 0,5%",
+        "description": ""
+      }
+    ]
+  }
+]

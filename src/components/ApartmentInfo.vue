@@ -1,9 +1,15 @@
 <template>
   <div class="apartment-info">
     <div class="labels">
-      <span class="labels__label labels__label__green">Скидка 2%</span>
-      <span class="labels__label labels__label__orange">Материнский капитал</span>
-      <span class="labels__label labels__label__purple">Ипотека от 0,1%</span>
+      <span
+        v-for="(label, i) in apartment.labels"
+        :key="i"
+        class="labels__label"
+        :class="
+          ('labels__label__' + labelColors[i]) + 
+          (label.description ? ' labels__label__' + labelColors[i] + '__with-description' : '')
+        "
+      >{{ label.label }}</span>
     </div>
     <div class="description">
       <img
@@ -11,23 +17,23 @@
         :src="image"
       >
       <div class="description-text">
-        <h2>2—комнатная квартира</h2>
+        <h2>{{ formattedType }}</h2>
         <div class="description-text__params">
-          <div class="description-text__param">22 356 000 ₽</div>
-          <div class="description-text__param">155 м<sup>2</sup></div>
+          <div class="description-text__param">{{ getFormatPrice(apartment.price * apartment.square) }} ₽</div>
+          <div class="description-text__param">{{ apartment.square }} м<sup>2</sup></div>
         </div>
         <div class="description-info">
           <div class="description-info-block">
             <label>Цена за м<sup>2</sup></label>
-            <span>120 000 ₽</span>
+            <span>{{ getFormatPrice(apartment.price) }} ₽</span>
           </div>
           <div class="description-info-block">
             <label>Отделка</label>
-            <span>Без отделки</span>
+            <span>{{ apartment.finishing }}</span>
           </div>
           <div class="description-info-block">
             <label>Корпус</label>
-            <span>3</span>
+            <span>{{ apartment.housing }}</span>
           </div>
         </div>
         <a href="#" class="description-text__more-info">Подробное описание</a>
@@ -70,18 +76,31 @@
 export default {
   name: 'ApartmentsInfo',
   props: {
-    img: { type: String, default: "apartment.png"},
+    apartment: { type: Object, required: true }
   },
   data() {
     return {
+      labelColors: ['green', 'orange', 'purple']
     }
   },
   computed: {
     image() {
-      return require('../assets/images/' + this.img)
+      return require('../assets/images/' + this.apartment.image)
+    },
+    formattedType() {
+      if (Number.isInteger(parseInt(this.apartment.type))) {
+        return this.apartment.type + '—комнатная квартира'
+      }
+      if (this.apartment.type === 'Своб. план.') {
+        return 'Свободная планировка'
+      }
+      return this.apartment.type
     }
   },
   methods: {
+    getFormatPrice(price) {
+      return (price + '').replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+    }
   }
 }
 </script>
@@ -96,20 +115,30 @@ export default {
     font-size: 14px;
 
     &__green {
+      background: #ddffe2;
       color: #56B77f;
-      padding-right: 32px;
-      background: #ddffe2 url("../assets/images/green_question.svg") calc(100% - 10px) no-repeat;
+      &__with-description {
+        padding-right: 32px;
+        background: #ddffe2 url("../assets/images/green_question.svg") calc(100% - 10px) no-repeat;
+      }
     }
 
     &__orange {
+      background: #fff7f2;
       color: #f2994a;
-      padding-right: 32px;
-      background: #fff7f2 url("../assets/images/orange_question.svg") calc(100% - 10px) no-repeat;
+      &__with-description {
+        padding-right: 32px;
+        background: #fff7f2 url("../assets/images/orange_question.svg") calc(100% - 10px) no-repeat;
+      }
     }
 
     &__purple {
       background: #e1e0fc;
       color: #9796d0;
+      &__with-description {
+        padding-right: 32px;
+        background: #e1e0fc url("../assets/images/purple_question.svg") calc(100% - 10px) no-repeat;
+      }
     }
   }
 }

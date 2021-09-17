@@ -13,6 +13,7 @@
             v-model="filters.types"
             type="checkbox"
             :value="type.value"
+            @change="findApartments()"
           >
           <span
             class="filter-checkbox-label__checkbox"
@@ -35,6 +36,7 @@
               class="filter-inputs__input"
               placeholder="15 255 999"
               @input="value => filters.minPrice = getNumberInputValue(value)"
+              @change="findApartments()"
             >
           </div>
           <div class="filter-inputs__container">
@@ -43,6 +45,7 @@
               class="filter-inputs__input"
               placeholder="155 255 999"
               @input="value => filters.maxPrice = getNumberInputValue(value)"
+              @change="findApartments()"
             > ₽
           </div>
         </div>
@@ -56,6 +59,7 @@
               class="filter-inputs__input" 
               placeholder="35"
               @input="value => filters.minSquare = getNumberInputValue(value)"
+              @change="findApartments()"
             >
           </div>
           <div class="filter-inputs__container">
@@ -64,6 +68,7 @@
               class="filter-inputs__input" 
               placeholder="116"
               @input="value => filters.maxSquare = getNumberInputValue(value)"
+              @change="findApartments()"
             > м<sup>2</sup>
           </div>
         </div>
@@ -77,16 +82,19 @@
       <button
         class="filter-buttons__search primary"
         @click="showApartments"
-      >Показать 10 квартир</button>
+      >Показать {{ this.filteredApartments.length }} квартир</button>
     </div>
   </div>
 </template>
 
 <script>
+import apartments from "@/assets/apartments.json"
 export default {
   name: 'ApartmentsFilters',
   data() {
     return {
+      apartments,
+      filteredApartments: [],
       filters: {
         minPrice: '',
         maxPrice: '',
@@ -104,6 +112,10 @@ export default {
       ]
     }
   },
+  created() {
+    this.filteredApartments = this.apartments
+    this.$emit('show-apartments', this.filteredApartments)
+  },
   methods: {
     getNumberInputValue(value) {
       return value.target.value
@@ -118,9 +130,26 @@ export default {
         maxSquare: '',
         types: [],
       }
+      this.findApartments()
+    },
+    findApartments() {
+      const filters = this.getParsedFilters()
+      this.filteredApartments = this.apartments.filter(a => {
+        const totalPrice = a.price * a.square
+        return (!filters.minPrice || totalPrice >= filters.minPrice)
+          && (!filters.maxPrice || totalPrice <= filters.maxPrice)
+          && (!filters.minSquare || a.square >= filters.minSquare)
+          && (!filters.maxSquare || a.square <= filters.maxSquare)
+          && (filters.types.length === 0
+              || filters.types.includes(a.type)
+              || (filters.types.includes('4+') && a.type >= 4))
+      })
     },
     showApartments() {
-      this.$emit('show-apartments', Object.fromEntries(
+      this.$emit('show-apartments', this.filteredApartments)
+    },
+    getParsedFilters() {
+      return Object.fromEntries(
         Object.entries(this.filters).map(f => {
           if (typeof f[1] === 'string') {
             if (f[1].length === 0) f[1] = '0'
@@ -128,7 +157,7 @@ export default {
           }
           return f
         })
-      ))
+      )
     }
   }
 }

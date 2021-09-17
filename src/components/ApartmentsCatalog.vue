@@ -3,8 +3,11 @@
     <ApartmentsFilters
       @show-apartments="showApartments"
     />
-    <div class="results">
-      <h2>Найдено 10 квартир</h2>
+    <div
+      v-if="apartments && apartments.length > 0"
+      class="results"
+    >
+      <h2>Найдено {{ apartments.length }} квартир</h2>
       <table class="results__table" width="100%">
         <tr>
           <th
@@ -12,48 +15,71 @@
             :key="field.key"
           >{{ field.label }}</th>
         </tr>
-        <template v-for="(row) in 3">
+        <template v-for="(apartment, i) in apartments">
           <tr
-            :class="{ opened: opened.includes(row) }"
-            :key="row"
+            :class="{ opened: opened.includes(i) }"
+            :key="i"
             class="results__body-row"
           >
             <td
-              v-for="i in fields.length"
-              :key="i"
+              v-for="(field, j) in fields"
+              :key="j"
+              @click="toggle(i)"
               :class="{
-                'results__body-row__bold': fields[i - 1].bold
+                'results__body-row__bold': field.bold
               }"
-              @click="toggle(row)"
-            >Ячейка {{ i }}</td>
+            >
+              <template v-if="field.key === 'type'">
+                {{ getFormatType(apartment[field.key]) }}
+              </template>
+              <template v-else-if="field.key === 'square'">
+                {{ apartment[field.key] }} м<sup>2</sup>
+              </template>
+              <template v-else-if="field.key === 'price'">
+                {{ getFormatPrice(apartment[field.key]) }} ₽
+              </template>
+              <template v-else>
+                {{ apartment[field.key] }}
+              </template>
+            </td>
             <td class="results__row-btn heart-btn">
               <button class="results__heart-btn secondary"></button>
             </td>
             <td
               class="results__row-btn arrow-btn"
-              @click="toggle(row)"
+              @click="toggle(i)"
             >
               <div
                 class="results__expand-btn"
                 :class="{
-                  'results__expand-btn__inverted': opened.includes(row)
+                  'results__expand-btn__inverted': opened.includes(i)
                 }"
               />
             </td>
           </tr>
           <tr
-            v-if="opened.includes(row)"
-            :key="row * 5"
+            v-if="opened.includes(i)"
+            :key="i + '_expanded'"
             class="results__body-row__expanded"
           >
             <td :colspan="fields.length + 2">
-              <ApartmentInfo />
+              <ApartmentInfo :apartment="apartment"/>
             </td>
           </tr>
         </template>
         <tr>
         </tr>
       </table>
+    </div>
+    <div
+      v-else
+      class="not-found"
+    >
+      <img src="@/assets/images/not_found.svg">
+      <div class="not-found__text">
+        <h2>Мы ничего похожего не нашли</h2>
+        <p>Попробуйте задать другие условия поиска или сбросьте фильтр</p>
+      </div>
     </div>
   </div>
 </template>
@@ -69,7 +95,6 @@ export default {
   },
   data() {
     return {
-      filters: {},
       fields: [
         { key: 'type', label: 'Тип', bold: true },
         { key: 'floor', label: 'Этаж', bold: false },
@@ -78,11 +103,12 @@ export default {
         { key: 'price', label: 'Стоимость', bold: true },
       ],
       opened: [],
+      apartments: []
     }
   },
   methods: {
     showApartments(values) {
-      this.filters = values
+      this.apartments = values
     },
     toggle(id) {
       const index = this.opened.indexOf(id);
@@ -91,20 +117,30 @@ export default {
       } else {
         this.opened.push(id)
       }
+    },
+    getFormatType(type) {
+      if (Number.isInteger(parseInt(type))) {
+        return type + '-комн.'
+      }
+      return type
+    },
+    getFormatPrice(price) {
+      return (price + '').replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.results {
+.results, .not-found {
   background-color: #fff;
   border: 1px solid #d8d8d8;
   border-radius: 10px;
   padding: 30px 0;
   margin-top: 32px;
   overflow: hidden;
-
+}
+.results {
   h2 {
     padding: 0 30px;
   }
@@ -195,6 +231,26 @@ export default {
       width: 20px;
       padding: 0 30px 0 20px;
     }
+  }
+}
+
+.not-found {
+  display: flex;
+  align-items: center;
+  padding: 30px 60px 30px 30px;
+
+  img {
+    margin-right: 52px;
+    width: 240px;
+    height: 240px;
+  }
+
+  h2 {
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin: 0;
   }
 }
 </style>
