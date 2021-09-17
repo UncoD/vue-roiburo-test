@@ -31,18 +31,18 @@
         <div class="filter-inputs">
           <div class="filter-inputs__container">
             От <input
-              v-model="filters.minCost"
+              v-model="filters.minPrice"
               class="filter-inputs__input"
               placeholder="15 255 999"
-              @input="value => filters.minCost = getNumberInputValue(value)"
+              @input="value => filters.minPrice = getNumberInputValue(value)"
             >
           </div>
           <div class="filter-inputs__container">
             до <input
-              v-model="filters.maxCost"
+              v-model="filters.maxPrice"
               class="filter-inputs__input"
               placeholder="155 255 999"
-              @input="value => filters.maxCost = getNumberInputValue(value)"
+              @input="value => filters.maxPrice = getNumberInputValue(value)"
             > ₽
           </div>
         </div>
@@ -88,8 +88,8 @@ export default {
   data() {
     return {
       filters: {
-        minCost: '',
-        maxCost: '',
+        minPrice: '',
+        maxPrice: '',
         minSquare: '',
         maxSquare: '',
         types: [],
@@ -112,8 +112,8 @@ export default {
     },
     clearFilters() {
       this.filters = {
-        minCost: '',
-        maxCost: '',
+        minPrice: '',
+        maxPrice: '',
         minSquare: '',
         maxSquare: '',
         types: [],

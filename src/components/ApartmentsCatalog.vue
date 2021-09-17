@@ -75,7 +75,7 @@ export default {
         { key: 'floor', label: 'Этаж', bold: false },
         { key: 'deadline', label: 'Срок сдачи', bold: false },
         { key: 'square', label: 'Площадь', bold: false },
-        { key: 'cost', label: 'Стоимость', bold: true },
+        { key: 'price', label: 'Стоимость', bold: true },
       ],
       opened: [],
     }
